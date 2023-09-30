@@ -9,8 +9,8 @@ const cat = {
 
 const cat2 = { ...cat }
 
-cat2.name  = 'mart';
-cat2.breed = 'ragdoll'
+cat2.name  = 'Mart';
+cat2.breed = 'Ragdoll'
 cat2.color = 'grayish'
 
 cat.greeting();
