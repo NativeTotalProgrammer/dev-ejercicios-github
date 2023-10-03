@@ -1,32 +1,27 @@
 import { LitElement, html } from 'lit-element';
 import '../buttons-component-folder/buttons-component';
 import '../card-component-folder/card-component';
-import { rickMortyService } from '../service-component-folder/service-component';
+import '../data-manager-folder/data-manager';
 
 class App extends LitElement {
-  static properties = {
-    character: { type: Object },
-    currentIndex: { type: Number },
-  };
-
-  constructor() {
-    super();
-    this.character = {};
-    this.currentIndex = 0;
-  }
-
+  static properties = {};
 
   async handlePageChange(event) {
-    const page = event.detail;
-    console.log('page', event.detail);
-    const characters = await rickMortyService.fetchCharacter(page);
-    this.character = characters;
+    const dataManager = this.shadowRoot.querySelector('data-manager');
+    
+    dataManager.handlePageChange(event.detail);
+  }
+  
+  handleCharacterLoaded(event) {
+    const characterCard = this.shadowRoot.querySelector('character-card');
+    characterCard.character = event.detail
   }
 
   render() {
     return html`
       <div class="container text-center">
-        <character-card .character="${this.character}"></character-card>
+        <data-manager @character-loaded="${this.handleCharacterLoaded}"></data-manager>
+        <character-card></character-card>
         <rick-morty-buttons @page-change="${this.handlePageChange}"></rick-morty-buttons>
       </div>
     `;
