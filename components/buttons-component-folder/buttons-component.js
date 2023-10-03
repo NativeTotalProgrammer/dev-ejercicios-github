@@ -1,25 +1,14 @@
 import { LitElement, html, css } from 'lit';
 
 export class RickMortyButtons extends LitElement {
-  static properties = {
-    page: { type: Number },
-  };
-
-  constructor() {
-    super();
-    this.page = 1;
-  }
+  static properties = {};
 
   handleNext() {
-    this.page++;
-    this.dispatchEvent(new CustomEvent('page-change', { detail: this.page }));
+    this.dispatchEvent(new CustomEvent('page-change', { detail: 1 }));
   }
 
   handlePrevious() {
-    if (this.page > 1) {
-      this.page--;
-      this.dispatchEvent(new CustomEvent('page-change', { detail: this.page }));
-    }
+    this.dispatchEvent(new CustomEvent('page-change', { detail: -1 }));
   }
 
   render() {
