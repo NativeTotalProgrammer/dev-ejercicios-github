@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit-element';
+import { LitElement, html } from 'lit-element';
 
 class CharacterCard extends LitElement {
   static properties = {
@@ -6,16 +6,14 @@ class CharacterCard extends LitElement {
   };
 
   render() {
-    return html`
-      <div class="character-card">
+    return this.character != undefined || this.character != null ?
+      html`<div class="character-card">
         <h2>${this.character.name}</h2>
         <img src="${this.character.image}" alt="${this.character.name}" />
         <p>${this.character.status}</p>
-      </div>
-    `;
+      </div>` :
+      html`<h3>Loading...</h3>`;
   }
-
-  static styles = css``;
 }
 
 customElements.define('character-card', CharacterCard);
